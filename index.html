@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animated Increment Counter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            color: white;
+
+        }
+
+        main {
+            height: 100vh;
+            background-color: #8e44ad;
+        }
+
+        section {
+            display: flex;
+            width: 100%;
+
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
+        div {
+            width: 200px;
+            text-align: center;
+        }
+
+        i {
+            font-weight: 400;
+            font-size: 3em;
+            display: block;
+            font-family: "Font Awesome 5 Brands",serif;
+            font-style: normal;
+
+        }
+
+        .counter {
+            padding: 0;
+            margin: 5px 0 0 0;
+            font-size: 60px;
+        }
+
+        .tw i:before{
+            content: "\f099";
+        }
+        .yb i:before{
+            content: "\f167";
+        }
+        .fb i:before{
+            content: "\f09a";
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="tw">
+                <i></i>
+                <p data-target="12000" class="counter">0</p>
+                <label>Twitter</label>
+            </div>
+            <div class="yb">
+                <i></i>
+                <p data-target="5000" class="counter">0</p>
+                <label>YouTube</label>
+            </div>
+            <div class="fb">
+                <i></i>
+                <p data-target="7500" class="counter">0</p>
+                <label>Facebook</label>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.querySelectorAll(".counter").forEach(counterElement => {
+            const foo = () => {
+                const target = +counterElement.getAttribute("data-target")
+                const currentValue = +counterElement.innerHTML;
+
+                const increment = target / 200;
+
+                if(currentValue < target) {
+                    counterElement.innerHTML = Math.ceil(currentValue + increment)
+
+                    setTimeout(foo, 1)
+                } else {
+                    counterElement.innerHTML = target;
+                }
+            }
+
+            foo()
+        })
+    </script>
+</body>
+</html>
